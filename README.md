@@ -28,7 +28,7 @@ wget https://github.com/praetorian-inc/Hob0Rules/raw/master/d3adhob0.rule -O /op
 ```
 Usage:
   /opt/pmh/pownMyHash.sh <hash-type> <hash-file>
-  /opt/pmh/pownMyHash.sh test <dico-to-test> (will be tested against /opt/.training_ntlm.txt in NTLM)
+  /opt/pmh/pownMyHash.sh test <dico-to-test> (will be tested against /opt/pmh/.training_ntlm.txt in NTLM)
   TEST_DICO=<dico-to-test> /opt/pmh/pownMyHash.sh <hash-type> <hash-file>
 
 With:
