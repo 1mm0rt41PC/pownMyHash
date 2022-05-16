@@ -19,6 +19,7 @@ curl https://hashcat.net/hashcat/ 2>/dev/null | grep -E '<a href="([^"]+.7z)' |h
 7z x /opt/hashcat.7z
 mv /opt/hashcat* /opt/hashcat/
 rm /opt/hashcat.7z
+touch /opt/hashcat/hashcat.potfile
 wget https://github.com/NotSoSecure/password_cracking_rules/raw/master/OneRuleToRuleThemAll.rule -O /opt/hashcat/rules/OneRuleToRuleThemAll.rule
 wget https://github.com/praetorian-inc/Hob0Rules/raw/master/hob064.rule -O /opt/hashcat/rules/hob064.rule
 wget https://github.com/praetorian-inc/Hob0Rules/raw/master/d3adhob0.rule -O /opt/hashcat/rules/d3adhob0.rule
