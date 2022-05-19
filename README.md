@@ -4,6 +4,9 @@ A simple script that automates password cracking with hashcat
 
 # Install
 ```bash
+apt update
+apt install p7zip-full -y
+rm -rf /usr/local/cuda-11.1/ /usr/local/cuda-11.2/ /usr/local/cuda-11.3/ /usr/local/cuda-11.4/ /usr/local/cuda-11.5/
 mkdir -p /opt/hashcat/
 mkdir -p /opt/dico/
 mkdir -p /opt/pmh/stats/
@@ -23,6 +26,9 @@ touch /opt/hashcat/hashcat.potfile
 wget https://github.com/NotSoSecure/password_cracking_rules/raw/master/OneRuleToRuleThemAll.rule -O /opt/hashcat/rules/OneRuleToRuleThemAll.rule
 wget https://github.com/praetorian-inc/Hob0Rules/raw/master/hob064.rule -O /opt/hashcat/rules/hob064.rule
 wget https://github.com/praetorian-inc/Hob0Rules/raw/master/d3adhob0.rule -O /opt/hashcat/rules/d3adhob0.rule
+
+/opt/hashcat/hashcat.bin -b -m 1000
+/opt/hashcat/hashcat.bin -b -m 2100
 ```
 
 # Usage
