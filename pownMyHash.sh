@@ -440,9 +440,10 @@ EOD
 		export HASH_TYPE=1000 # mode NTLM
 	fi
 fi
-if title "Brute force password with max len 7"; then
-	hashcat 3 -i '?a?a?a?a?a?a?a'
-fi
+# Not very effectiv
+#if title "Brute force password with max len 7"; then
+#	hashcat 3 -i '?a?a?a?a?a?a?a'
+#fi
 
 found2dict
 loopOnPotfile 1
