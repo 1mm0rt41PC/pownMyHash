@@ -414,9 +414,9 @@ if [ "$HASH_TYPE" = "1000" ]; then
 		stats_on LM
 		
 		export T1="`mktemp`"
-		grep -E '^[A-Fa-f0-9]{16}:[^:\r\n]+$' $HC/hashcat.potfile | grep -vE '^$' > $T1
+		grep -E '^[A-Fa-f0-9]{16}:[^\r\n]+$' $HC/hashcat.potfile | grep -vE '^$' > $T1
 		echo '[*] Merging LM password'
-		cat <<'EOD' | python
+		cat <<'EOD' | python3
 import os,sys,re;
 potfile=open(os.environ['T1'],'r').read().strip('\r\n\t ').replace('\r','').split('\n');
 h=open(os.environ['HASHES'],'r').read().strip('\r\n\t ').split('\n');
