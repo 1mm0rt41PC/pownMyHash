@@ -476,6 +476,13 @@ fi
 
 loopOnPotfile
 
+# Use all rules in the folder
+for rule in $(find $HC/rules/ -type f);do
+	hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule`
+done
+
+loopOnPotfile
+
 for dico in `echo $FINDINGS; find $DICO_PATH/ -name '*.rank' -size -15M -type f`; do
 	if title "Brute force password with $dico base"; then
 		stats_on $dico "BRUTEFORCE"
