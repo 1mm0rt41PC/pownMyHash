@@ -476,10 +476,12 @@ fi
 
 loopOnPotfile
 
-# Use all rules in the folder
-for rule in $(find $HC/rules/ -type f);do
-	hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule`
-done
+if title "Use all rules"; then
+	# Use all rules in the folder. Idea from https://github.com/nodauf
+	for rule in $(find $HC/rules/ -type f);do
+		hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule`
+	done
+fi
 
 loopOnPotfile
 
