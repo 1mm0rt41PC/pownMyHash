@@ -476,11 +476,25 @@ fi
 
 loopOnPotfile
 
-if title "Use all rules"; then
-	# Use all rules in the folder. Idea from https://github.com/nodauf
+if title "Using potfile as dico with all rules with stacking with best64 rule "; then
+	hashcat 0 `absPath $FINDINGS`
 	for rule in $(find $HC/rules/ -type f);do
-		hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule`
+		title "Using potfile as dico with rule $rule" 0
+		hashcat 0 `absPath $FINDINGS` -r `absPath $HC/rules/$rule` -r `absPath $HC/rules/best64.rule` --loopback
 	done
+fi
+
+if title "Use all rules with stacking with best64 rule on all dico"; then
+	# Use all rules in the folder with all dico with the rule best64. Idea from https://github.com/nodauf
+	for dico in `echo $DICO_PATH/*`; do            
+	do
+	    for rule in $(find $HC/rules/ -type f);do
+     	            stats_on $dico $rule
+		    hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule` -r `absPath $HC/rules/best64.rule` --loopback
+                    stats_on $dico $rule
+	    done
+	done
+	
 fi
 
 loopOnPotfile
