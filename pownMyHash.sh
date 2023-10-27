@@ -486,7 +486,7 @@ fi
 
 if title "Use all rules with stacking with best64 rule on all dico"; then
 	# Use all rules in the folder with all dico with the rule best64. Idea from https://github.com/nodauf
-	for dico in `echo $DICO_PATH/*`; do            
+	for dico in `echo $DICO_PATH/*.dico`; do            
 	do
 	    for rule in $(find $HC/rules/ -type f);do
      	            stats_on $dico $rule
