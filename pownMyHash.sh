@@ -25,7 +25,7 @@ export HC=/opt/hashcat/
 # Folder where dico are
 export DICO_PATH=/opt/dico/
 # List of rules. Expected folder: $HC/rules/
-export RULES='best64.rule d3ad0ne.rule rockyou-30000.rule OneRuleToRuleThemAll.rule hob064.rule d3adhob0.rule combinator.rule'
+export RULES='best64.rule d3ad0ne.rule rockyou-30000.rule OneRuleToRuleThemAll.rule hob064.rule d3adhob0.rule combinator.rule dive.rule'
 
 
 # ONLY IF YOU USE CYGWIN - Folder where hashcat is
