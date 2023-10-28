@@ -489,9 +489,8 @@ fi
 
 if title "Use all rules on all dico"; then
 	# Use all rules in the folder with all dico with the rule best64. Idea from https://github.com/nodauf
-	for dico in `echo $DICO_PATH/*.dico`; do            
-	do
-	    for rule in $(find $HC/rules/ -type f);do
+	for dico in `echo $DICO_PATH/*.dico`; do    
+	    for rule in $(find $HC/rules/ -type f); do
      	            stats_on $dico $rule
 		    hashcat 0 `absPath $dico` -r `absPath $rule` --loopback
                     stats_on $dico $rule
@@ -502,9 +501,8 @@ fi
 
 if title "Use all rules with stacking with best64 rule on all dico"; then
 	# Use all rules in the folder with all dico with the rule best64. Idea from https://github.com/nodauf
-	for dico in `echo $DICO_PATH/*.dico`; do            
-	do
-	    for rule in $(find $HC/rules/ -type f);do
+	for dico in `echo $DICO_PATH/*.dico`; do
+	    for rule in $(find $HC/rules/ -type f); do
      	            stats_on $dico $rule
 		    hashcat 0 `absPath $dico` -r `absPath $rule` -r `absPath $HC/rules/best64.rule` --loopback
                     stats_on $dico $rule
