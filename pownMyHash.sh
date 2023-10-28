@@ -483,7 +483,7 @@ if title "Using potfile as dico with all rules with stacking with best64 rule ";
 	hashcat 0 `absPath $FINDINGS`
 	for rule in $(find $HC/rules/ -type f);do
 		title "Using potfile as dico with rule $rule" 0
-		hashcat 0 `absPath $FINDINGS` -r `absPath $HC/rules/$rule` -r `absPath $HC/rules/best64.rule` --loopback
+		hashcat 0 `absPath $FINDINGS` -r `absPath $rule` -r `absPath $HC/rules/best64.rule` --loopback
 	done
 fi
 
@@ -493,7 +493,7 @@ if title "Use all rules on all dico"; then
 	do
 	    for rule in $(find $HC/rules/ -type f);do
      	            stats_on $dico $rule
-		    hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule` --loopback
+		    hashcat 0 `absPath $dico` -r `absPath $rule` --loopback
                     stats_on $dico $rule
 	    done
 	done
@@ -506,7 +506,7 @@ if title "Use all rules with stacking with best64 rule on all dico"; then
 	do
 	    for rule in $(find $HC/rules/ -type f);do
      	            stats_on $dico $rule
-		    hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule` -r `absPath $HC/rules/best64.rule` --loopback
+		    hashcat 0 `absPath $dico` -r `absPath $rule` -r `absPath $HC/rules/best64.rule` --loopback
                     stats_on $dico $rule
 	    done
 	done
