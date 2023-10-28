@@ -359,6 +359,9 @@ if [ "$HASH_TYPE" -lt 0 ] || !([ -n "$HASH_TYPE" ] && [ "$HASH_TYPE" -eq "$HASH_
 	exit
 fi
 
+# Make sure the dico $FINDINGS is up-to-date with all the last cracked hashes from the potfile
+found2dict
+
 if [ "$TEST_DICO" != "" ]; then
 	if title "Test dico $TEST_DICO against $HASHES in $HASH_TYPE type ?"; then
 		export known_pass=`$HCB -m $HASH_TYPE $HASHES --show /opt/.training_ntlm.txt | wc -l`
