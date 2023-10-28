@@ -493,7 +493,7 @@ if title "Use all rules on all dico"; then
 	do
 	    for rule in $(find $HC/rules/ -type f);do
      	            stats_on $dico $rule
-		    hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule` -r `absPath $HC/rules/best64.rule` --loopback
+		    hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule` --loopback
                     stats_on $dico $rule
 	    done
 	done
