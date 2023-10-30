@@ -488,7 +488,7 @@ if title "Using potfile as dico with all rules with stacking with best64 rule ";
 fi
 
 if title "Use all rules on all dico"; then
-	# Use all rules in the folder with all dico with the rule best64. Idea from https://github.com/nodauf
+	# Use all rules in the folder with all dico. Idea from https://github.com/nodauf
 	for dico in `echo $DICO_PATH/*.dico`; do    
 	    for rule in $(find $HC/rules/ -type f); do
      	            stats_on $dico $rule
