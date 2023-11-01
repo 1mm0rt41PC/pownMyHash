@@ -397,11 +397,11 @@ fi
 if [ "$HASH_TYPE" = "1000" ]; then
 	if title 'Contribute to the local training database'; then
 		export mytmp=`mktemp`
-		# Compte machine => xxxx$:
+		# Compte machine => xxxx$
 		# Compte Guest => :501:
 		# Compte krbtgt => :502:
 		# Compte DefaultAccount => :503:
-		cat $TRAINING_NTLM $HASHES | grep -vF '$:' | grep -vE ':(501|502|503):' | tr '[:upper:]' '[:lower:]' | grep -vF 'healthmailbox' | dos2unix | sed -E 's/^[^\r\n:]+:[0-9]+:/x:42:/g' | sed -E 's/:::[^\r\n]+/:::/g' | grep -E 'x:42:[a-f0-9]{32}:[a-f0-9]{32}:::' | sort -u > $mytmp
+		cat $TRAINING_NTLM $HASHES | grep -vF '$' | grep -vE ':(501|502|503):' | tr '[:upper:]' '[:lower:]' | grep -vF 'healthmailbox' | dos2unix | sed -E 's/^[^\r\n:]+:[0-9]+:/x:42:/g' | sed -E 's/:::[^\r\n]+/:::/g' | grep -E 'x:42:[a-f0-9]{32}:[a-f0-9]{32}:::' | sort -u > $mytmp
 		mv $mytmp $TRAINING_NTLM
 		grep -E '^[a-fA-F0-9]{32}:' $HC/hashcat.potfile | cut -d : -f 1 | tr '[:upper:]' '[:lower:]' > $mytmp
 		export mytmp2=`mktemp`
