@@ -25,7 +25,7 @@ export HC=/opt/hashcat/
 # Folder where dico are
 export DICO_PATH=/opt/dico/
 # List of rules. Expected folder: $HC/rules/
-export RULES='best64.rule d3ad0ne.rule rockyou-30000.rule OneRuleToRuleThemAll.rule hob064.rule d3adhob0.rule combinator.rule'
+export RULES='best64.rule d3ad0ne.rule rockyou-30000.rule OneRuleToRuleThemAll.rule hob064.rule d3adhob0.rule combinator.rule dive.rule'
 
 
 # ONLY IF YOU USE CYGWIN - Folder where hashcat is
@@ -359,6 +359,9 @@ if [ "$HASH_TYPE" -lt 0 ] || !([ -n "$HASH_TYPE" ] && [ "$HASH_TYPE" -eq "$HASH_
 	exit
 fi
 
+# Make sure the dico $FINDINGS is up-to-date with all the last cracked hashes from the potfile
+found2dict
+
 if [ "$TEST_DICO" != "" ]; then
 	if title "Test dico $TEST_DICO against $HASHES in $HASH_TYPE type ?"; then
 		export known_pass=`$HCB -m $HASH_TYPE $HASHES --show /opt/.training_ntlm.txt | wc -l`
@@ -476,11 +479,36 @@ fi
 
 loopOnPotfile
 
-if title "Use all rules"; then
-	# Use all rules in the folder. Idea from https://github.com/nodauf
+if title "Using potfile as dico with all rules with stacking with best64 rule "; then
+	hashcat 0 `absPath $FINDINGS`
 	for rule in $(find $HC/rules/ -type f);do
-		hashcat 0 `absPath $dico` -r `absPath $HC/rules/$rule`
+		title "Using potfile as dico with rule $rule" 0
+		hashcat 0 `absPath $FINDINGS` -r `absPath $rule` -r `absPath $HC/rules/best64.rule` --loopback
 	done
+fi
+
+if title "Use all rules on all dico"; then
+	# Use all rules in the folder with all dico. Idea from https://github.com/nodauf
+	for dico in `echo $DICO_PATH/*.dico`; do    
+	    for rule in $(find $HC/rules/ -type f); do
+     	            stats_on $dico $rule
+		    hashcat 0 `absPath $dico` -r `absPath $rule` --loopback
+                    stats_on $dico $rule
+	    done
+	done
+	
+fi
+
+if title "Use all rules with stacking with best64 rule on all dico"; then
+	# Use all rules in the folder with all dico with the rule best64. Idea from https://github.com/nodauf
+	for dico in `echo $DICO_PATH/*.dico`; do
+	    for rule in $(find $HC/rules/ -type f); do
+     	            stats_on $dico $rule
+		    hashcat 0 `absPath $dico` -r `absPath $rule` -r `absPath $HC/rules/best64.rule` --loopback
+                    stats_on $dico $rule
+	    done
+	done
+	
 fi
 
 loopOnPotfile
