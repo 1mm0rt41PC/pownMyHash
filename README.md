@@ -26,6 +26,16 @@ touch /opt/hashcat/hashcat.potfile
 wget https://github.com/NotSoSecure/password_cracking_rules/raw/master/OneRuleToRuleThemAll.rule -O /opt/hashcat/rules/OneRuleToRuleThemAll.rule
 wget https://github.com/praetorian-inc/Hob0Rules/raw/master/hob064.rule -O /opt/hashcat/rules/hob064.rule
 wget https://github.com/praetorian-inc/Hob0Rules/raw/master/d3adhob0.rule -O /opt/hashcat/rules/d3adhob0.rule
+wget https://github.com/clem9669/hashcat-rule/raw/master/clem9669_large.rule -O /opt/hashcat/rules/clem9669_large.rule
+wget https://github.com/piotrcki/wordlist/releases/download/v0.0.0/piotrcki-wordlist.txt.xz.part00 -O /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part00
+wget https://github.com/piotrcki/wordlist/releases/download/v0.0.0/piotrcki-wordlist.txt.xz.part01 -O /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part01
+cat /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part00 /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part01 > piotrcki-wordlist.txt.xz
+rm /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part00 /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part01
+xz -d /opt/hashcat/dico/piotrcki-wordlist.txt.xz
+wget https://github.com/Unic0rn28/hashcat-rules/raw/main/unicorn%20rules/SuperUnicorn.rule -O /opt/hashcat/dico/SuperUnicorn.rule
+wget https://github.com/rarecoil/pantagrule/raw/master/rules/hashesorg.v6/pantagrule.hashorg.v6.random.rule.gz -O /opt/hashcat/dico/pantagrule.hashorg.v6.random.rule.gz
+7z x /opt/hashcat/dico/pantagrule.hashorg.v6.random.rule.gz
+
 
 /opt/hashcat/hashcat.bin -b -m 1000
 /opt/hashcat/hashcat.bin -b -m 2100
