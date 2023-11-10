@@ -32,9 +32,9 @@ wget https://github.com/piotrcki/wordlist/releases/download/v0.0.0/piotrcki-word
 cat /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part00 /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part01 > piotrcki-wordlist.txt.xz
 rm /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part00 /opt/hashcat/dico/piotrcki-wordlist.txt.xz.part01
 xz -d /opt/hashcat/dico/piotrcki-wordlist.txt.xz
-wget https://github.com/Unic0rn28/hashcat-rules/raw/main/unicorn%20rules/SuperUnicorn.rule -O /opt/hashcat/dico/SuperUnicorn.rule
-wget https://github.com/rarecoil/pantagrule/raw/master/rules/hashesorg.v6/pantagrule.hashorg.v6.random.rule.gz -O /opt/hashcat/dico/pantagrule.hashorg.v6.random.rule.gz
-7z x /opt/hashcat/dico/pantagrule.hashorg.v6.random.rule.gz
+wget https://github.com/Unic0rn28/hashcat-rules/raw/main/unicorn%20rules/SuperUnicorn.rule -O /opt/hashcat/rules/SuperUnicorn.rule
+wget https://github.com/rarecoil/pantagrule/raw/master/rules/hashesorg.v6/pantagrule.hashorg.v6.random.rule.gz -O /opt/hashcat/rules/pantagrule.hashorg.v6.random.rule.gz
+7z x /opt/hashcat/rules/pantagrule.hashorg.v6.random.rule.gz
 
 
 /opt/hashcat/hashcat.bin -b -m 1000
