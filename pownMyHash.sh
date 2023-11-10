@@ -513,6 +513,14 @@ fi
 
 loopOnPotfile
 
+# No more idea ? Use generate-rules, according to hashcat this is a good thing if you are out of ideas on what to do next when you have already tried all your rules on all your dictionaries
+if title "Infinite loop with random rules"; then
+    while true
+    do
+        hashcat 0 `absPath $dico` --generate-rules=40000000 --debug-mode=1 --debug-file=$STATS_DIR/matched-random.rules
+    done
+fi
+
 for dico in `echo $FINDINGS; find $DICO_PATH/ -name '*.rank' -size -15M -type f`; do
 	if title "Brute force password with $dico base"; then
 		stats_on $dico "BRUTEFORCE"
