@@ -403,7 +403,7 @@ if [ "$HASH_TYPE" = "1000" ]; then
 		# Compte DefaultAccount => :503:
 		cat $TRAINING_NTLM $HASHES | grep -vF '$' | grep -vE ':(501|502|503):' | tr '[:upper:]' '[:lower:]' | grep -vF 'healthmailbox' | grep -vF 'msol_' | dos2unix | sed -E 's/^[^\r\n:]+:[0-9]+:/x:42:/g' | sed -E 's/:::[^\r\n]+/:::/g' | grep -E 'x:42:[a-f0-9]{32}:[a-f0-9]{32}:::' | sort -u > $mytmp
 		mv $mytmp $TRAINING_NTLM
-		grep -E '^[a-fA-F0-9]{32}:' $HC/hashcat.potfile | cut -d : -f 1 | tr '[:upper:]' '[:lower:]' > $mytmp
+		grep -aE '^[a-fA-F0-9]{32}:' $HC/hashcat.potfile | cut -d : -f 1 | tr '[:upper:]' '[:lower:]' > $mytmp
 		export mytmp2=`mktemp`
 		(grep -vFf $mytmp $TRAINING_NTLM > $mytmp2 && mv $mytmp2 $TRAINING_NTLM && rm $mytmp) &
 	fi
