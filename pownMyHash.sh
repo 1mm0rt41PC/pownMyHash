@@ -364,7 +364,7 @@ found2dict
 
 if [ "$TEST_DICO" != "" ]; then
 	if title "Test dico $TEST_DICO against $HASHES in $HASH_TYPE type ?"; then
-		export known_pass=`$HCB -m $HASH_TYPE $HASHES --show /opt/.training_ntlm.txt | wc -l`
+		export known_pass=`$HCB -m $HASH_TYPE $HASHES --show $TRAINING_NTLM | wc -l`
 		echo "[*] Test dico $TEST_DICO against $HASHES in $HASH_TYPE type" >> $SCRIPT_PATH/.test-dico.log
 		echo "[*] NB password know at this point: $known_pass" | tee -a $SCRIPT_PATH/.test-dico.log
 		hashcat 0 `absPath $TEST_DICO`
@@ -373,10 +373,10 @@ if [ "$TEST_DICO" != "" ]; then
 				hashcat 0 `absPath $TEST_DICO` -r `absPath $HC/rules/$rule`
 				loopOnPotfile
 			fi
-			export known_pass2=`$HCB -m $HASH_TYPE $HASHES --show /opt/.training_ntlm.txt | wc -l`
+			export known_pass2=`$HCB -m $HASH_TYPE $HASHES --show $TRAINING_NTLM | wc -l`
 			echo "[*] NB password know at this point: `expr $known_pass2 '-' $known_pass`" | tee -a $SCRIPT_PATH/.test-dico.log
 		done
-		export known_pass2=`$HCB -m $HASH_TYPE $HASHES --show /opt/.training_ntlm.txt | wc -l`
+		export known_pass2=`$HCB -m $HASH_TYPE $HASHES --show $TRAINING_NTLM | wc -l`
 		echo "[*] NB password know at this point: `expr $known_pass2 '-' $known_pass`" | tee -a $SCRIPT_PATH/.test-dico.log
 	fi
 	exit 0
@@ -401,7 +401,7 @@ if [ "$HASH_TYPE" = "1000" ]; then
 		# Compte Guest => :501:
 		# Compte krbtgt => :502:
 		# Compte DefaultAccount => :503:
-		cat $TRAINING_NTLM $HASHES | grep -vF '$' | grep -vE ':(501|502|503):' | tr '[:upper:]' '[:lower:]' | grep -vF 'healthmailbox' | dos2unix | sed -E 's/^[^\r\n:]+:[0-9]+:/x:42:/g' | sed -E 's/:::[^\r\n]+/:::/g' | grep -E 'x:42:[a-f0-9]{32}:[a-f0-9]{32}:::' | sort -u > $mytmp
+		cat $TRAINING_NTLM $HASHES | grep -vF '$' | grep -vE ':(501|502|503):' | tr '[:upper:]' '[:lower:]' | grep -vF 'healthmailbox' | grep -vF 'msol_' | dos2unix | sed -E 's/^[^\r\n:]+:[0-9]+:/x:42:/g' | sed -E 's/:::[^\r\n]+/:::/g' | grep -E 'x:42:[a-f0-9]{32}:[a-f0-9]{32}:::' | sort -u > $mytmp
 		mv $mytmp $TRAINING_NTLM
 		grep -E '^[a-fA-F0-9]{32}:' $HC/hashcat.potfile | cut -d : -f 1 | tr '[:upper:]' '[:lower:]' > $mytmp
 		export mytmp2=`mktemp`
